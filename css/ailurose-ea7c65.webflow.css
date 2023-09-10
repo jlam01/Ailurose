@@ -3554,6 +3554,7 @@ blockquote {
 }
 
 .footer-social-block-three {
+  text-align: center;
   justify-content: flex-start;
   align-items: center;
   margin-left: -32px;
@@ -4688,6 +4689,10 @@ blockquote {
   .button-primary-3.footer-form-button {
     position: relative;
     right: 0;
+  }
+
+  .footer-social-block-three {
+    text-align: center;
   }
 
   .footer-bottom-2 {

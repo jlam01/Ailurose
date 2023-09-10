@@ -1011,7 +1011,7 @@
       var $ = window.jQuery;
       var $win = $(window);
       var $doc = $(document);
-      var isFunction2 = $.isFunction;
+      var isFunction3 = $.isFunction;
       var _ = Webflow._ = require_underscore_custom();
       var tram = Webflow.tram = require_tram_min() && $.tram;
       var domready = false;
@@ -1031,11 +1031,11 @@
       };
       function bindModule(module2) {
         if (Webflow.env()) {
-          isFunction2(module2.design) && $win.on("__wf_design", module2.design);
-          isFunction2(module2.preview) && $win.on("__wf_preview", module2.preview);
+          isFunction3(module2.design) && $win.on("__wf_design", module2.design);
+          isFunction3(module2.preview) && $win.on("__wf_preview", module2.preview);
         }
-        isFunction2(module2.destroy) && $win.on("__wf_destroy", module2.destroy);
-        if (module2.ready && isFunction2(module2.ready)) {
+        isFunction3(module2.destroy) && $win.on("__wf_destroy", module2.destroy);
+        if (module2.ready && isFunction3(module2.ready)) {
           addReady(module2);
         }
       }
@@ -1050,10 +1050,10 @@
         primary.push(module2.ready);
       }
       function unbindModule(module2) {
-        isFunction2(module2.design) && $win.off("__wf_design", module2.design);
-        isFunction2(module2.preview) && $win.off("__wf_preview", module2.preview);
-        isFunction2(module2.destroy) && $win.off("__wf_destroy", module2.destroy);
-        if (module2.ready && isFunction2(module2.ready)) {
+        isFunction3(module2.design) && $win.off("__wf_design", module2.design);
+        isFunction3(module2.preview) && $win.off("__wf_preview", module2.preview);
+        isFunction3(module2.destroy) && $win.off("__wf_destroy", module2.destroy);
+        if (module2.ready && isFunction3(module2.ready)) {
           removeReady(module2);
         }
       }
@@ -1064,7 +1064,7 @@
       }
       Webflow.push = function(ready) {
         if (domready) {
-          isFunction2(ready) && ready();
+          isFunction3(ready) && ready();
           return;
         }
         secondary.push(ready);
@@ -1162,7 +1162,7 @@
         Webflow.resize.up();
       };
       function callReady(readyFn) {
-        isFunction2(readyFn) && readyFn();
+        isFunction3(readyFn) && readyFn();
       }
       function restoreModules() {
         destroyed = false;
@@ -2296,15 +2296,15 @@
       var TypeError2 = global2.TypeError;
       var WeakMap2 = global2.WeakMap;
       var set2;
-      var get;
+      var get2;
       var has2;
       var enforce = function(it) {
-        return has2(it) ? get(it) : set2(it, {});
+        return has2(it) ? get2(it) : set2(it, {});
       };
       var getterFor = function(TYPE) {
         return function(it) {
           var state;
-          if (!isObject2(it) || (state = get(it)).type !== TYPE) {
+          if (!isObject2(it) || (state = get2(it)).type !== TYPE) {
             throw TypeError2("Incompatible receiver, " + TYPE + " required");
           }
           return state;
@@ -2322,7 +2322,7 @@
           wmset(store, it, metadata);
           return metadata;
         };
-        get = function(it) {
+        get2 = function(it) {
           return wmget(store, it) || {};
         };
         has2 = function(it) {
@@ -2338,7 +2338,7 @@
           createNonEnumerableProperty(it, STATE, metadata);
           return metadata;
         };
-        get = function(it) {
+        get2 = function(it) {
           return hasOwn4(it, STATE) ? it[STATE] : {};
         };
         has2 = function(it) {
@@ -2352,7 +2352,7 @@
       var STATE;
       module.exports = {
         set: set2,
-        get,
+        get: get2,
         has: has2,
         enforce,
         getterFor
@@ -4556,14 +4556,14 @@
       var funcTag = "[object Function]";
       var genTag = "[object GeneratorFunction]";
       var proxyTag = "[object Proxy]";
-      function isFunction2(value) {
+      function isFunction3(value) {
         if (!isObject2(value)) {
           return false;
         }
         var tag = baseGetTag(value);
         return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
       }
-      module.exports = isFunction2;
+      module.exports = isFunction3;
     }
   });
 
@@ -4616,7 +4616,7 @@
   // node_modules/lodash/_baseIsNative.js
   var require_baseIsNative = __commonJS({
     "node_modules/lodash/_baseIsNative.js"(exports, module) {
-      var isFunction2 = require_isFunction();
+      var isFunction3 = require_isFunction();
       var isMasked = require_isMasked();
       var isObject2 = require_isObject();
       var toSource = require_toSource();
@@ -4633,7 +4633,7 @@
         if (!isObject2(value) || isMasked(value)) {
           return false;
         }
-        var pattern = isFunction2(value) ? reIsNative : reIsHostCtor;
+        var pattern = isFunction3(value) ? reIsNative : reIsHostCtor;
         return pattern.test(toSource(value));
       }
       module.exports = baseIsNative;
@@ -5513,10 +5513,10 @@
   // node_modules/lodash/isArrayLike.js
   var require_isArrayLike = __commonJS({
     "node_modules/lodash/isArrayLike.js"(exports, module) {
-      var isFunction2 = require_isFunction();
+      var isFunction3 = require_isFunction();
       var isLength = require_isLength();
       function isArrayLike(value) {
-        return value != null && isLength(value.length) && !isFunction2(value);
+        return value != null && isLength(value.length) && !isFunction3(value);
       }
       module.exports = isArrayLike;
     }
@@ -6066,11 +6066,11 @@
   var require_get = __commonJS({
     "node_modules/lodash/get.js"(exports, module) {
       var baseGet = require_baseGet();
-      function get(object, path, defaultValue) {
+      function get2(object, path, defaultValue) {
         var result = object == null ? void 0 : baseGet(object, path);
         return result === void 0 ? defaultValue : result;
       }
-      module.exports = get;
+      module.exports = get2;
     }
   });
 
@@ -6129,7 +6129,7 @@
   var require_baseMatchesProperty = __commonJS({
     "node_modules/lodash/_baseMatchesProperty.js"(exports, module) {
       var baseIsEqual = require_baseIsEqual();
-      var get = require_get();
+      var get2 = require_get();
       var hasIn = require_hasIn();
       var isKey = require_isKey();
       var isStrictComparable = require_isStrictComparable();
@@ -6142,7 +6142,7 @@
           return matchesStrictComparable(toKey(path), srcValue);
         }
         return function(object) {
-          var objValue = get(object, path);
+          var objValue = get2(object, path);
           return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
         };
       }
@@ -15152,7 +15152,7 @@
         },
         // `URLSearchParams.prototype.get` method
         // https://url.spec.whatwg.org/#dom-urlsearchparams-get
-        get: function get(name) {
+        get: function get2(name) {
           validateArgumentsLength(arguments.length, 1);
           var entries2 = getInternalParamsState(this).entries;
           var key = $toString(name);
@@ -17052,7 +17052,7 @@
               return this;
             } : KEY == "delete" ? function(key) {
               return IS_WEAK && !isObject2(key) ? false : uncurriedNativeMethod(this, key === 0 ? 0 : key);
-            } : KEY == "get" ? function get(key) {
+            } : KEY == "get" ? function get2(key) {
               return IS_WEAK && !isObject2(key) ? void 0 : uncurriedNativeMethod(this, key === 0 ? 0 : key);
             } : KEY == "has" ? function has2(key) {
               return IS_WEAK && !isObject2(key) ? false : uncurriedNativeMethod(this, key === 0 ? 0 : key);
@@ -17264,7 +17264,7 @@
           redefineAll(Prototype, IS_MAP ? {
             // `Map.prototype.get(key)` method
             // https://tc39.es/ecma262/#sec-map.prototype.get
-            get: function get(key) {
+            get: function get2(key) {
               var entry = getEntry(this, key);
               return entry && entry.value;
             },
@@ -24051,7 +24051,7 @@
         this._strongMap = null;
         this.data = null;
       };
-      UniversalWeakMap.prototype.get = function get(key) {
+      UniversalWeakMap.prototype.get = function get2(key) {
         var map2 = this._getMap(key, false);
         if (map2) {
           return map2.get(key);
@@ -28967,35 +28967,35 @@
       var _GraphQLError = require_GraphQLError();
       Object.defineProperty(exports, "GraphQLError", {
         enumerable: true,
-        get: function get() {
+        get: function get2() {
           return _GraphQLError.GraphQLError;
         }
       });
       var _syntaxError = require_syntaxError();
       Object.defineProperty(exports, "syntaxError", {
         enumerable: true,
-        get: function get() {
+        get: function get2() {
           return _syntaxError.syntaxError;
         }
       });
       var _locatedError = require_locatedError();
       Object.defineProperty(exports, "locatedError", {
         enumerable: true,
-        get: function get() {
+        get: function get2() {
           return _locatedError.locatedError;
         }
       });
       var _printError = require_printError();
       Object.defineProperty(exports, "printError", {
         enumerable: true,
-        get: function get() {
+        get: function get2() {
           return _printError.printError;
         }
       });
       var _formatError = require_formatError();
       Object.defineProperty(exports, "formatError", {
         enumerable: true,
-        get: function get() {
+        get: function get2() {
           return _formatError.formatError;
         }
       });
@@ -34645,14 +34645,14 @@
         }
         hooks.suppressDeprecationWarnings = false;
         hooks.deprecationHandler = null;
-        function isFunction2(input) {
+        function isFunction3(input) {
           return input instanceof Function || Object.prototype.toString.call(input) === "[object Function]";
         }
         function set2(config) {
           var prop2, i;
           for (i in config) {
             prop2 = config[i];
-            if (isFunction2(prop2)) {
+            if (isFunction3(prop2)) {
               this[i] = prop2;
             } else {
               this["_" + i] = prop2;
@@ -34714,7 +34714,7 @@
         };
         function calendar(key, mom, now2) {
           var output = this._calendar[key] || this._calendar["sameElse"];
-          return isFunction2(output) ? output.call(mom, now2) : output;
+          return isFunction3(output) ? output.call(mom, now2) : output;
         }
         var defaultLongDateFormat = {
           LTS: "h:mm:ss A",
@@ -34761,11 +34761,11 @@
         };
         function relativeTime(number, withoutSuffix, string, isFuture) {
           var output = this._relativeTime[string];
-          return isFunction2(output) ? output(number, withoutSuffix, string, isFuture) : output.replace(/%d/i, number);
+          return isFunction3(output) ? output(number, withoutSuffix, string, isFuture) : output.replace(/%d/i, number);
         }
         function pastFuture(diff2, output) {
           var format2 = this._relativeTime[diff2 > 0 ? "future" : "past"];
-          return isFunction2(format2) ? format2(output) : format2.replace(/%s/i, output);
+          return isFunction3(format2) ? format2(output) : format2.replace(/%s/i, output);
         }
         var aliases = {};
         function addUnitAlias(unit, shorthand) {
@@ -34848,7 +34848,7 @@
           return function(mom) {
             var output = "", i2;
             for (i2 = 0; i2 < length2; i2++) {
-              output += isFunction2(array[i2]) ? array[i2].call(mom, format2) : array[i2];
+              output += isFunction3(array[i2]) ? array[i2].call(mom, format2) : array[i2];
             }
             return output;
           };
@@ -34893,7 +34893,7 @@
         var matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i;
         var regexes = {};
         function addRegexToken(token2, regex, strictRegex) {
-          regexes[token2] = isFunction2(regex) ? regex : function(isStrict, localeData2) {
+          regexes[token2] = isFunction3(regex) ? regex : function(isStrict, localeData2) {
             return isStrict && strictRegex ? strictRegex : regex;
           };
         }
@@ -34993,11 +34993,11 @@
               hooks.updateOffset(this, keepTime);
               return this;
             } else {
-              return get(this, unit);
+              return get2(this, unit);
             }
           };
         }
-        function get(mom, unit) {
+        function get2(mom, unit) {
           return mom.isValid() ? mom._d["get" + (mom._isUTC ? "UTC" : "") + unit]() : NaN;
         }
         function set$1(mom, unit, value) {
@@ -35011,7 +35011,7 @@
         }
         function stringGet(units) {
           units = normalizeUnits(units);
-          if (isFunction2(this[units])) {
+          if (isFunction3(this[units])) {
             return this[units]();
           }
           return this;
@@ -35025,7 +35025,7 @@
             }
           } else {
             units = normalizeUnits(units);
-            if (isFunction2(this[units])) {
+            if (isFunction3(this[units])) {
               return this[units](value);
             }
           }
@@ -35193,7 +35193,7 @@
             hooks.updateOffset(this, true);
             return this;
           } else {
-            return get(this, "Month");
+            return get2(this, "Month");
           }
         }
         function getDaysInMonth() {
@@ -36726,10 +36726,10 @@
           }
           updateOffset = updateOffset == null ? true : updateOffset;
           if (months2) {
-            setMonth(mom, get(mom, "Month") + months2 * isAdding);
+            setMonth(mom, get2(mom, "Month") + months2 * isAdding);
           }
           if (days2) {
-            set$1(mom, "Date", get(mom, "Date") + days2 * isAdding);
+            set$1(mom, "Date", get2(mom, "Date") + days2 * isAdding);
           }
           if (milliseconds2) {
             mom._d.setTime(mom._d.valueOf() + milliseconds2 * isAdding);
@@ -36746,7 +36746,7 @@
         }
         function calendar$1(time, formats) {
           var now2 = time || createLocal(), sod = cloneWithOffset(now2, this).startOf("day"), format2 = hooks.calendarFormat(this, sod) || "sameElse";
-          var output = formats && (isFunction2(formats[format2]) ? formats[format2].call(this, now2) : formats[format2]);
+          var output = formats && (isFunction3(formats[format2]) ? formats[format2].call(this, now2) : formats[format2]);
           return this.format(output || this.localeData().calendar(format2, this, createLocal(now2)));
         }
         function clone() {
@@ -36865,7 +36865,7 @@
           if (m.year() < 0 || m.year() > 9999) {
             return formatMoment(m, utc ? "YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]" : "YYYYYY-MM-DD[T]HH:mm:ss.SSSZ");
           }
-          if (isFunction2(Date.prototype.toISOString)) {
+          if (isFunction3(Date.prototype.toISOString)) {
             if (utc) {
               return this.toDate().toISOString();
             } else {
@@ -39655,7 +39655,7 @@
     });
     return left + "_" + right.join("");
   }
-  var import_invert, hex_lookup, reverse_hex_lookup, collSlug, fieldSlug, _test, restoreSlug;
+  var import_invert, hex_lookup, reverse_hex_lookup, collSlug, fieldSlug, restoreSlug;
   var init_SchemaEncoder = __esm({
     "packages/systems/dynamo/utils/SchemaEncoder/SchemaEncoder.ts"() {
       "use strict";
@@ -39681,7 +39681,6 @@
       reverse_hex_lookup = (0, import_invert.default)(hex_lookup);
       collSlug = (coll) => "c_" + _crapCode(coll.slug);
       fieldSlug = (field) => "f_" + _crapCode(field.slug);
-      _test = { _crapCode };
       restoreSlug = (slugWithPrefixAndCrapCode) => {
         const results = slugWithPrefixAndCrapCode.match(
           /^[fc]_([_A-Za-z0-9]+)_([0-9bcdfghjklmnpqrst]*)$/
@@ -39711,69 +39710,38 @@
   });
 
   // packages/systems/dynamo/utils/SchemaEncoder/index.ts
-  var SchemaEncoder_exports = {};
-  __export(SchemaEncoder_exports, {
-    _crapCode: () => _crapCode,
-    _test: () => _test,
-    collSlug: () => collSlug,
-    fieldSlug: () => fieldSlug,
-    restoreSlug: () => restoreSlug
-  });
   var init_SchemaEncoder2 = __esm({
     "packages/systems/dynamo/utils/SchemaEncoder/index.ts"() {
+      "use strict";
       init_SchemaEncoder();
     }
   });
 
-  // packages/systems/dynamo/utils/SlugUtils/SlugUtils.js
-  var require_SlugUtils = __commonJS({
-    "packages/systems/dynamo/utils/SlugUtils/SlugUtils.js"(exports) {
+  // packages/systems/dynamo/utils/SlugUtils/SlugUtils.ts
+  var fieldSlug2, DYNAMO_GQL_FIELD_SLUG, isDynamoGraphQLFieldSlug, collectionSlug;
+  var init_SlugUtils = __esm({
+    "packages/systems/dynamo/utils/SlugUtils/SlugUtils.ts"() {
       "use strict";
-      Object.defineProperty(exports, "__esModule", {
-        value: true
-      });
-      exports.isDynamoGraphQLFieldSlug = exports.fieldSlug = exports.collectionSlug = void 0;
-      Object.defineProperty(exports, "restoreSlug", {
-        enumerable: true,
-        get: function() {
-          return _SchemaEncoder.restoreSlug;
-        }
-      });
-      var _SchemaEncoder = (init_SchemaEncoder2(), __toCommonJS(SchemaEncoder_exports));
-      var fieldSlug2 = (slug) => (0, _SchemaEncoder.fieldSlug)({
-        slug
-      });
-      exports.fieldSlug = fieldSlug2;
-      var DYNAMO_GQL_FIELD_SLUG = "f_";
-      var isDynamoGraphQLFieldSlug = (str) => str.startsWith(DYNAMO_GQL_FIELD_SLUG);
-      exports.isDynamoGraphQLFieldSlug = isDynamoGraphQLFieldSlug;
-      var collectionSlug = (slug) => (0, _SchemaEncoder.collSlug)({
-        slug
-      });
-      exports.collectionSlug = collectionSlug;
+      init_SchemaEncoder2();
+      init_SchemaEncoder2();
+      fieldSlug2 = (slug) => fieldSlug({ slug });
+      DYNAMO_GQL_FIELD_SLUG = "f_";
+      isDynamoGraphQLFieldSlug = (str) => str.startsWith(DYNAMO_GQL_FIELD_SLUG);
+      collectionSlug = (slug) => collSlug({ slug });
     }
   });
 
-  // packages/systems/dynamo/utils/SlugUtils/index.js
-  var require_SlugUtils2 = __commonJS({
-    "packages/systems/dynamo/utils/SlugUtils/index.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", {
-        value: true
-      });
-      var _SlugUtils = require_SlugUtils();
-      Object.keys(_SlugUtils).forEach(function(key) {
-        if (key === "default" || key === "__esModule")
-          return;
-        if (key in exports && exports[key] === _SlugUtils[key])
-          return;
-        Object.defineProperty(exports, key, {
-          enumerable: true,
-          get: function() {
-            return _SlugUtils[key];
-          }
-        });
-      });
+  // packages/systems/dynamo/utils/SlugUtils/index.ts
+  var SlugUtils_exports = {};
+  __export(SlugUtils_exports, {
+    collectionSlug: () => collectionSlug,
+    fieldSlug: () => fieldSlug2,
+    isDynamoGraphQLFieldSlug: () => isDynamoGraphQLFieldSlug,
+    restoreSlug: () => restoreSlug
+  });
+  var init_SlugUtils2 = __esm({
+    "packages/systems/dynamo/utils/SlugUtils/index.ts"() {
+      init_SlugUtils();
     }
   });
 
@@ -40437,10 +40405,10 @@
           return !isStale(this, hit);
         }
         get(key) {
-          return get(this, key, true);
+          return get2(this, key, true);
         }
         peek(key) {
-          return get(this, key, false);
+          return get2(this, key, false);
         }
         pop() {
           const node = this[LRU_LIST].tail;
@@ -40469,10 +40437,10 @@
           }
         }
         prune() {
-          this[CACHE].forEach((value, key) => get(this, key, false));
+          this[CACHE].forEach((value, key) => get2(this, key, false));
         }
       };
-      var get = (self2, key, doUse) => {
+      var get2 = (self2, key, doUse) => {
         const node = self2[CACHE].get(key);
         if (node) {
           const hit = node.value;
@@ -40691,7 +40659,7 @@
       var _extends2 = _interopRequireDefault(require_extends());
       var _DynamoConditionUtils = require_DynamoConditionUtils();
       var _momentTimezone = _interopRequireDefault(require_moment_timezone2());
-      var _SlugUtils = require_SlugUtils2();
+      var _SlugUtils = (init_SlugUtils2(), __toCommonJS(SlugUtils_exports));
       var _memo = (init_memo(), __toCommonJS(memo_exports));
       var _ParamFieldPathUtils = (init_ParamFieldPathUtils(), __toCommonJS(ParamFieldPathUtils_exports));
       var _constants = (init_constants(), __toCommonJS(constants_exports));
@@ -41644,15 +41612,6 @@
   });
 
   // packages/systems/core/utils/EmbedUtils/shared/index.ts
-  var shared_exports = {};
-  __export(shared_exports, {
-    extractToken: () => extractToken,
-    getCatchAllTokenPattern: () => getCatchAllTokenPattern,
-    getExternalTokenPattern: () => getExternalTokenPattern,
-    getWfTokenPattern: () => getWfTokenPattern,
-    parseTokenJson: () => parseTokenJson,
-    stripLegacyShorthandSuffix: () => stripLegacyShorthandSuffix
-  });
   function parseTokenJson(string) {
     if (string.match(getWfTokenPattern())) {
       let token;
@@ -41680,9 +41639,10 @@
   function stripLegacyShorthandSuffix(tokenPath) {
     return tokenPath.split(":").map((part) => part.split(".")[0]).join(":");
   }
-  var import_unescape, getWfTokenPattern, getCatchAllTokenPattern, getExternalTokenPattern;
+  var import_unescape, getWfTokenPattern, getCatchAllTokenPattern;
   var init_shared = __esm({
     "packages/systems/core/utils/EmbedUtils/shared/index.ts"() {
+      "use strict";
       import_unescape = __toESM(require_unescape());
       getWfTokenPattern = function() {
         return /{{\s*wf\s*({.*?})\s*}}/g;
@@ -41690,31 +41650,27 @@
       getCatchAllTokenPattern = function() {
         return /{{\s*(.*?)\s*}}/g;
       };
-      getExternalTokenPattern = function() {
-        return /{\\{(\s*.*?\s*)}}/g;
-      };
     }
   });
 
-  // packages/systems/core/utils/EmbedUtils/simpleReplaceTokens/index.js
-  var require_simpleReplaceTokens = __commonJS({
-    "packages/systems/core/utils/EmbedUtils/simpleReplaceTokens/index.js"(exports) {
-      "use strict";
-      var _interopRequireDefault = require_interopRequireDefault().default;
-      Object.defineProperty(exports, "__esModule", {
-        value: true
-      });
-      exports.simpleReplaceTokens = simpleReplaceTokens;
-      var _isFunction = _interopRequireDefault(require_isFunction());
-      var _get = _interopRequireDefault(require_get());
-      var _shared = (init_shared(), __toCommonJS(shared_exports));
-      function simpleReplaceTokens(replaceable, item) {
-        return replaceable.replace((0, _shared.getWfTokenPattern)(), function(match2) {
-          const token = (0, _shared.parseTokenJson)(match2) || {};
-          const path = token.path.split(".");
-          return (0, _isFunction.default)(item.getIn) ? item.getIn(path, "") : (0, _get.default)(item, path, "");
-        });
-      }
+  // packages/systems/core/utils/EmbedUtils/simpleReplaceTokens/index.ts
+  var simpleReplaceTokens_exports = {};
+  __export(simpleReplaceTokens_exports, {
+    simpleReplaceTokens: () => simpleReplaceTokens
+  });
+  function simpleReplaceTokens(replaceable, item) {
+    return replaceable.replace(getWfTokenPattern(), function(match2) {
+      const token = parseTokenJson(match2) || {};
+      const path = token.path.split(".");
+      return (0, import_isFunction2.default)(item.getIn) ? item.getIn(path, "") : (0, import_get.default)(item, path, "");
+    });
+  }
+  var import_isFunction2, import_get;
+  var init_simpleReplaceTokens = __esm({
+    "packages/systems/core/utils/EmbedUtils/simpleReplaceTokens/index.ts"() {
+      import_isFunction2 = __toESM(require_isFunction());
+      import_get = __toESM(require_get());
+      init_shared();
     }
   });
 
@@ -41733,7 +41689,7 @@
       var _get = _interopRequireDefault(require_get());
       var _isInteger = _interopRequireDefault(require_isInteger());
       var _accounting = require_accounting();
-      var _simpleReplaceTokens = require_simpleReplaceTokens();
+      var _simpleReplaceTokens = (init_simpleReplaceTokens(), __toCommonJS(simpleReplaceTokens_exports));
       var _CurrencyUtils = require_CurrencyUtils();
       function formatPriceFromSettings(price, currencySettings) {
         price = (0, _CurrencyUtils.validatePrice)(price) ? price : (0, _CurrencyUtils._invalid)();
@@ -41922,8 +41878,8 @@
       var detailPage = (value, [collectionIdOrLegacySlug], {
         collectionSlugMap
       }) => {
-        const collectionSlug = collectionSlugMap[collectionIdOrLegacySlug] || collectionIdOrLegacySlug;
-        return value ? `/${collectionSlug}/${value}` : null;
+        const collectionSlug2 = collectionSlugMap[collectionIdOrLegacySlug] || collectionIdOrLegacySlug;
+        return value ? `/${collectionSlug2}/${value}` : null;
       };
       var style = (value, [styleProp]) => {
         if (styleProp === "background-image") {
@@ -41961,10 +41917,10 @@
       };
       var replaceDetailPageHrefCollectionSlug = (href, collectionId, collectionSlugMap) => {
         const [emptyString, originalCollectionSlug, ...rest] = href.split("/");
-        const collectionSlug = collectionSlugMap[collectionId] || originalCollectionSlug;
-        return [emptyString, collectionSlug, ...rest].join("/");
+        const collectionSlug2 = collectionSlugMap[collectionId] || originalCollectionSlug;
+        return [emptyString, collectionSlug2, ...rest].join("/");
       };
-      var get = (obj, key) => {
+      var get2 = (obj, key) => {
         if (obj != null && typeof obj.get === "function") {
           return obj.get(key);
         }
@@ -41974,8 +41930,8 @@
         if (!obj)
           return null;
         return (0, _CurrencyUtils.renderPriceFromSettings)({
-          unit: get(obj, "unit"),
-          value: get(obj, "value")
+          unit: get2(obj, "unit"),
+          value: get2(obj, "value")
         }, context.currencySettings);
       };
       var transformerIndex = {
